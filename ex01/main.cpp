@@ -7,29 +7,28 @@ void	get_user_input(PhoneBook *book)
 	std::string	input;
 
 	std::cin.clear();
-	std::cout << "Introduzca un input" << std::endl;
+	std::cout << "Introduce an input: " << std::endl;
 	std::cin >> input;
-	std::cout << "Su input: " << input << std::endl;
+	if (std::cin.eof())
+		std::exit(1);
 	if (input.empty())
 		return ;
 	if (!input.compare("ADD"))
 		book->add();
 	else if (!input.compare("SEARCH"))
 	{
-		std::cout << "Introduzca un índice" << std::endl;
-		std::cin >> input;
-		book->search(std::stoi(input));
+		book->search();
 	}
-		
 	else if (!input.compare("EXIT"))
 		book->exit();
 	else
-		std::cout << "Input erróneo" << std::endl;
+		std::cout << "Invalid input" << std::endl;
 }
 
 int	main(void)
 {
 	PhoneBook p;
+	std::cout << "Commands: ADD, SEARCH and EXIT" << std::endl;
 	while (1)
 	{
 		get_user_input(&p);

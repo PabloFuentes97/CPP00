@@ -3,20 +3,40 @@
 
 Contact::Contact(void)
 {
-	std::cout << "Constructor de contact" << std::endl;
 	this->init = 0;
 }
 
 Contact::~Contact(void)
 {
-	std::cout << "Destructor de contact" << std::endl;
 }
 
-std::string	Contact::get_data(int index)
+std::string	Contact::getData(int index)
 {
 	return (this->data[index]);
 }
-void	Contact::add_data(void)
+
+int	checkValidData(std::string buffer, int index)
+{
+	int	i;
+
+	if (index == 3)
+	{
+		if (buffer.length() != 9)
+			return (0);
+		for (i = 0; i < buffer.length(); i++)
+			if (!isdigit(buffer[i]))
+				return (0);
+	}
+	else
+	{
+		for (i = 0; i < buffer.length(); i++)
+			if (isdigit(buffer[i]))
+				return (0);
+	}
+	return (1);
+}
+
+void	Contact::setData(void)
 {
 	std::string	dict[5] = {"first name", "last name", "nickname", "phone number", "darkest secret"};
 	std::string	buffer;
@@ -26,17 +46,27 @@ void	Contact::add_data(void)
 	while (i < 5){
 		std::cout << "Enter " << dict[i] << ": " << std::endl;
 		std::cin >> buffer;
-		if (!buffer.empty())
+		if (std::cin.eof())
+			std::exit(1);
+		while (buffer.empty() || !checkValidData(buffer, i))
 		{
-			this->data[i].assign(buffer);
-			i++;
+			std::cout << "Enter " << dict[i] << ": " << std::endl;
+			std::cin >> buffer;		
 		}
+		this->data[i].assign(buffer);
+		i++;
 		buffer.clear();
 	}
 	this->init = 1;
 }
 
-int	Contact::get_init(void)
+int	Contact::getInit(void)
 {
 	return (this->init);
+}
+
+void	Contact::printInfo(std::string dict[])
+{
+	for (int i = 0; i < 5; i++)
+		std::cout << dict[i] << ": " << this->getData(i) << std::endl;
 }

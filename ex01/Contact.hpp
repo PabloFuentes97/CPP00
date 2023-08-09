@@ -12,9 +12,10 @@ class Contact
 		
 		Contact(void);
 		~Contact(void);
-		int			get_init(void);
-		void		add_data(void);
-		std::string	get_data(int index);
+		int			getInit(void);
+		void		setData(void);
+		std::string	getData(int index);
+		void		printInfo(std::string dict[]);
 };
 
 #endif

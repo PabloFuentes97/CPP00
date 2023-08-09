@@ -6,14 +6,15 @@
 class	PhoneBook
 {
 	private:
-		Contact contacts[7];
+		Contact contacts[8];
 		int		index;
+		void	printTable(std::string dict[]);
 	public:
 		PhoneBook();
 		~PhoneBook();
-		Contact	get_contact(int index);
+		Contact	getContact(int index);
 		void	add();
-		void	search(int index);
+		void	search(void);
 		void	exit(void);
 };
 
