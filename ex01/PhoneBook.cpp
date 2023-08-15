@@ -6,7 +6,8 @@
 
 PhoneBook::PhoneBook(void)
 {
-	this->index = 0;
+	this->numContacts = 0;
+	this->oldestContact = 0;
 }
 
 PhoneBook::~PhoneBook(void)
@@ -15,11 +16,19 @@ PhoneBook::~PhoneBook(void)
 
 void 	PhoneBook::add(void)
 {
-	if (this->index == 7)
-		this->contacts[this->index].~Contact();
-	this->contacts[this->index].setData();
-	if (this->index < 7)
-		this->index++;
+	if (this->numContacts == MAXCONTACTS)
+	{
+		this->contacts[this->oldestContact].~Contact();
+		this->contacts[this->oldestContact].setData();
+		this->oldestContact++;
+		if (this->oldestContact == MAXCONTACTS)
+			this->oldestContact = 0;
+	}
+	else if (this->numContacts < MAXCONTACTS)
+	{
+		this->contacts[this->numContacts].setData();
+		this->numContacts++;
+	}
 }
 
 void	PhoneBook::printTable(std::string dict[])
@@ -32,7 +41,7 @@ void	PhoneBook::printTable(std::string dict[])
 		std::cout << std::setw(10) << std::right << dict[i] << " |";
 	std::cout << std::endl;
 	int i = 0;
-	while (i < 8 && this->contacts[i].getInit() != 0)
+	while (i < MAXCONTACTS && this->contacts[i].getInit() != 0)
 	{
 		std::cout << std::setw(5) << std::left << i;
 		for (int j = 0; j < 3; j++)
@@ -66,7 +75,7 @@ void	PhoneBook::search(void)
 	int			spaces;
 	std::string	print;
 
-	if (this->index == 0)
+	if (this->numContacts == 0)
 	{
 		std::cout << "No contacts added" << std::endl;
 		return ;
@@ -78,11 +87,14 @@ void	PhoneBook::search(void)
 	if (std::cin.eof())
 		std::exit(1);
 	if (!strIsDigit(input))
-		return ;
-	index = std::stoi(input);
-	if (index >= 8)
 	{
-		std::cout << "Index surpass max number of contacts" << std::endl;
+		std::cout << "No number introduced" << std::endl;
+		return ;
+	}
+	index = std::stoi(input);
+	if (index >= MAXCONTACTS)
+	{
+		std::cout << "numContacts surpass max number of contacts" << std::endl;
 		return ;
 	}
 	if (this->contacts[index].getInit() == 0)
