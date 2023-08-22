@@ -2,7 +2,7 @@
 #include "PhoneBook.hpp"
 #include <iostream>
 
-void	get_user_input(PhoneBook *book)
+void	getUserInput(PhoneBook *book)
 {
 	std::string	input;
 
@@ -31,7 +31,7 @@ int	main(void)
 	std::cout << "Commands: ADD, SEARCH and EXIT" << std::endl;
 	while (1)
 	{
-		get_user_input(&p);
+		getUserInput(&p);
 	}
 	return (0);
 }

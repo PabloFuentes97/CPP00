@@ -15,7 +15,6 @@ class	PhoneBook
 	public:
 		PhoneBook();
 		~PhoneBook();
-		Contact	getContact(int index);
 		void	add();
 		void	search(void);
 		void	exit(void);
