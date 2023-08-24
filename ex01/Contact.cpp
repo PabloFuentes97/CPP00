@@ -39,23 +39,19 @@ int	checkValidData(std::string buffer, int index)
 void	Contact::setData(void)
 {
 	std::string	dict[5] = {"first name", "last name", "nickname", "phone number", "darkest secret"};
-	std::string	buffer;
+	std::string	input;
 	int			i;
 
 	i = 0;
-	while (i < 5){
+	for (int i = 0; i < 5; i++){
 		std::cout << "Enter " << dict[i] << ": " << std::endl;
-		std::cin >> buffer;
-		if (std::cin.eof())
-			std::exit(1);
-		while (buffer.empty() || !checkValidData(buffer, i))
+		input = getUserInput();
+		while (input.empty() || !checkValidData(input, i))
 		{
 			std::cout << "Enter " << dict[i] << ": " << std::endl;
-			std::cin >> buffer;		
+			std::cin >> input;		
 		}
-		this->data[i].assign(buffer);
-		i++;
-		buffer.clear();
+		this->data[i].assign(input);
 	}
 	this->init = 1;
 }
@@ -65,8 +61,10 @@ int	Contact::getInit(void)
 	return (this->init);
 }
 
-void	Contact::printInfo(std::string dict[])
+void	Contact::printInfo()
 {
+	std::string	dict[5] = {"first name", "last name", "nickname", "phone number", "darkest secret"};
+	
 	for (int i = 0; i < 5; i++)
 		std::cout << dict[i] << ": " << this->getData(i) << std::endl;
 }

@@ -31,10 +31,10 @@ void 	PhoneBook::add(void)
 	}
 }
 
-void	PhoneBook::printTable(std::string dict[])
+void	PhoneBook::printTable()
 {
 	std::string	print;
-	int	spaces;
+	std::string	dict[5] = {"first name", "last name", "nickname", "phone number", "darkest secret"};
 
 	std::cout << "     ";
 	for (int i = 0; i < 3; i++)
@@ -56,53 +56,59 @@ void	PhoneBook::printTable(std::string dict[])
 	}
 }
 
-int		strIsDigit(std::string str)
+void	PhoneBook::findCommand(std::string input)
 {
-	for (int i = 0; i < str.length(); i++)
+	if (!input.compare("ADD"))
+		this->add();
+	else if (!input.compare("SEARCH"))
+		this->search();
+	else if (!input.compare("EXIT"))
+		this->exit();
+	else
+		std::cout << "Command doesn't exist!" << std::endl;
+}
+
+int	PhoneBook::validIndex(std::string input)
+{
+	int		index;
+	int		input_len = input.length();
+	char	index_c[input_len];
+	if (!strIsDigit(input))
 	{
-		if (!isdigit(str[i]))
-			return (0);
+		std::cout << "No number introduced" << std::endl;
+		return (-1);
 	}
-	return (1);
+	strcpy(index_c, input.c_str());
+	index = std::atoi(index_c);
+	if (index < 0 || index >= MAXCONTACTS)
+	{
+		std::cout << "Index out of range" << std::endl;
+		return (-1);
+	}
+	if (this->contacts[index].getInit() == 0)
+	{
+		std::cout << "Contact doesn't exist" << std::endl;
+		return (-1);
+	}
+	return (index);
 }
 
 void	PhoneBook::search(void)
 {	
 	int			index;
 	std::string	input;
-	int 		i;
-	int			j;
-	int			spaces;
-	std::string	print;
 
 	if (this->numContacts == 0)
 	{
 		std::cout << "No contacts added" << std::endl;
 		return ;
 	}
-	std::string	dict[5] = {"first name", "last name", "nickname", "phone number", "darkest secret"};
-	this->printTable(dict);
+	this->printTable();
 	std::cout << "Introduce an index: " << std::endl;
-	std::cin >> input;
-	if (std::cin.eof())
-		std::exit(1);
-	if (!strIsDigit(input))
-	{
-		std::cout << "No number introduced" << std::endl;
-		return ;
-	}
-	index = std::stoi(input);
-	if (index >= MAXCONTACTS)
-	{
-		std::cout << "numContacts surpass max number of contacts" << std::endl;
-		return ;
-	}
-	if (this->contacts[index].getInit() == 0)
-	{
-		std::cout << "Contact doesn't exist" << std::endl;
-		return ;
-	}
-	this->contacts[index].printInfo(dict);
+	input = getUserInput();
+	index = validIndex(input);
+	if (index >= 0)
+		this->contacts[index].printInfo();
 }
 
 void	PhoneBook::exit(void)

@@ -1,6 +1,6 @@
-NAME = agenda
+NAME = phoneBook
 
-SRC = Contact.cpp PhoneBook.cpp main.cpp
+SRC = Contact.cpp PhoneBook.cpp Utils.cpp main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

@@ -1,7 +1,8 @@
-#include <string>
-
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
+
+#include <string>
+#include "Utils.hpp"
 
 class Contact
 {
@@ -15,7 +16,7 @@ class Contact
 		int			getInit(void);
 		void		setData(void);
 		std::string	getData(int index);
-		void		printInfo(std::string dict[]);
+		void		printInfo();
 };
 
 #endif
