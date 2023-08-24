@@ -4,10 +4,8 @@
 #include <iomanip>
 #include <string>
 
-PhoneBook::PhoneBook(void)
+PhoneBook::PhoneBook(void) : numContacts(0), oldestContact(0)
 {
-	this->numContacts = 0;
-	this->oldestContact = 0;
 }
 
 PhoneBook::~PhoneBook(void)

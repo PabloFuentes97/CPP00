@@ -1,9 +1,8 @@
 #include "Contact.hpp"
 #include <iostream>
 
-Contact::Contact(void)
+Contact::Contact(void) : init(0)
 {
-	this->init = 0;
 }
 
 Contact::~Contact(void)
