@@ -48,7 +48,7 @@ void	Contact::setData(void)
 		while (input.empty() || !checkValidData(input, i))
 		{
 			std::cout << "Enter " << dict[i] << ": " << std::endl;
-			std::cin >> input;		
+			input = getUserInput();		
 		}
 		this->data[i].assign(input);
 	}

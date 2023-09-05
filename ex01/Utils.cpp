@@ -15,7 +15,7 @@ std::string	getUserInput(void)
 	std::string	input;
 
 	std::cin.clear();
-	std::cin >> input;
+	std::getline(std::cin, input);
 	if (std::cin.eof())
 		std::exit(EXIT_FAILURE);
 	return (input);

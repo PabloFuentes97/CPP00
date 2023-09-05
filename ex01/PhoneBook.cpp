@@ -69,15 +69,15 @@ void	PhoneBook::findCommand(std::string input)
 int	PhoneBook::validIndex(std::string input)
 {
 	int		index;
-	int		input_len = input.length();
-	char	index_c[input_len];
+	int		inputLen = input.length();
+	char	indexC[inputLen + 1];
 	if (!strIsDigit(input))
 	{
 		std::cout << "No number introduced" << std::endl;
 		return (-1);
 	}
-	strcpy(index_c, input.c_str());
-	index = std::atoi(index_c);
+	strcpy(indexC, input.c_str());
+	index = std::atoi(indexC);
 	if (index < 0 || index >= MAXCONTACTS)
 	{
 		std::cout << "Index out of range" << std::endl;
